@@ -14,4 +14,25 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\InfixParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\InfixParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\project_1_guidelines.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\project_1.pdf">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
