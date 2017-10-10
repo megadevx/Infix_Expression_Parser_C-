@@ -12,8 +12,6 @@ public:
 
 	Infix_Parser(string in);
 
-	Infix_Parser(Infix_Parser in);
-
 	//set input string
 	void set_input_str(string in);
 

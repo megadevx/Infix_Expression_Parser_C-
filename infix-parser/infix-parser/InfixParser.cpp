@@ -8,10 +8,6 @@ Infix_Parser::Infix_Parser(string in)
 {
 }
 
-Infix_Parser::Infix_Parser(Infix_Parser in)
-{
-}
-
 void Infix_Parser::set_input_str(string in)
 {
 }
