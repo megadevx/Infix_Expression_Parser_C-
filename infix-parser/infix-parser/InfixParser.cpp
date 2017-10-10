@@ -7,6 +7,7 @@ Infix_Parser::Infix_Parser()
 
 Infix_Parser::Infix_Parser(string in)
 {
+	Infix_Parser::set_input_str(in);
 }
 
 void Infix_Parser::parse(string in) 
