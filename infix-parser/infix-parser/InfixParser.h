@@ -18,6 +18,12 @@ public:
 	//get input string
 	string get_input_str();
 
+	//get the 
+	int evaluate();
+
+	int prec(string op);
+
+
 
 private:
 	stack<char> operators;
