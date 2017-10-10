@@ -1,8 +1,9 @@
 #include <iostream>
+#include "InfixParser.h"
 using namespace std;
 int main()
 {
-	cout << "hello world" << endl;
+	Infix_Parser ip;
 	system("pause");
 
 	return 1;
