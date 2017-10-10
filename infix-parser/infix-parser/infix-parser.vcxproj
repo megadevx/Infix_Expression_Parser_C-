@@ -147,15 +147,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\InfixParser.cpp" />
-    <ClCompile Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\infix-parser\infix-parser\InfixParser.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\project_1.pdf" />
     <None Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\project_1_guidelines.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="InfixParser.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="InfixParser.cpp" />
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
