@@ -23,5 +23,6 @@ private:
 	stack<char> operators;
 	stack<int> operands;
 	string input_str;
-	
+	string unary[4] = { "!", "++", "--", "-" };
+	string op_list = { "!", "++", "--", "-", "^", "*", "/", "%", "+", "-", ">", ">=", "<", "<=", "==", "!=", "&&", "||" };
 };
