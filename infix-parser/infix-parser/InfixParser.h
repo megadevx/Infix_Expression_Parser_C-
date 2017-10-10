@@ -24,17 +24,14 @@ public:
 	//get input string
 	string get_input_str();
 
-<<<<<<< HEAD
 	//get the 
 	int evaluate();
 
 	int prec(string op);
 
 
-=======
 	//read expression
 	void parse(string in);
->>>>>>> d6030a0a82fa82c0be7c3a30a25d98ba41c8252e
 
 private:
 	stack<char> operators;
