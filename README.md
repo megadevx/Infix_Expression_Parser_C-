@@ -36,7 +36,8 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Devin Ferguson** - ** -
+* **Morgan Adrales** 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
