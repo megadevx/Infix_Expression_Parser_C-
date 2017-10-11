@@ -43,6 +43,7 @@ void Infix_Parser::parse(string in)
 
 void Infix_Parser::set_input_str(string in)
 {
+	input_str = in;
 }
 
 string Infix_Parser::get_input_str()
