@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
 	Infix_Parser ip("++++2-5(3^2)");
-	ip.parse()
+	ip.parse();
 	system("pause");
 
 	return 1;
