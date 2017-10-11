@@ -1,6 +1,8 @@
-﻿  Main.cpp
-  InfixParser.cpp
+﻿  InfixParser.cpp
 c:\users\mjadr\documents\github\infix_expression_parser_cpp\infix-parser\infix-parser\infixparser.cpp(32): warning C4018: '<=': signed/unsigned mismatch
-c:\users\mjadr\documents\github\infix_expression_parser_cpp\infix-parser\infix-parser\infixparser.cpp(45): error C2084: function 'void Infix_Parser::set_input_str(std::string)' already has a body
-  c:\users\mjadr\documents\github\infix_expression_parser_cpp\infix-parser\infix-parser\infixparser.h(20): note: see previous definition of 'set_input_str'
   Generating Code...
+  Compiling...
+  Main.cpp
+  Generating Code...
+  infix-parser.vcxproj -> C:\Users\mjadr\Documents\GitHub\Infix_Expression_Parser_CPP\infix-parser\Debug\infix-parser.exe
+  infix-parser.vcxproj -> C:\Users\mjadr\Documents\GitHub\Infix_Expression_Parser_CPP\infix-parser\Debug\infix-parser.pdb (Partial PDB)

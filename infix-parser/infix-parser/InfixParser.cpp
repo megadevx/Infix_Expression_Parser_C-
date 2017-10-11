@@ -10,15 +10,15 @@ Infix_Parser::Infix_Parser(string in)
 	Infix_Parser::set_input_str(in);
 }
 
-void Infix_Parser::parse(string in) 
+void Infix_Parser::parse() 
 {
 	//Make sure that the expression isn't empty
-	if (in.size() == 0) {
+	if (input_str.size() == 0) {
 		cout << "Error reading the expression: expression is empty." << endl;
 	}
 
 	//Check the first character. Print out error messages if error reading expression
-	string first_char = string(1, in[0]);
+	string first_char = string(1, input_str[0]);
 
 	if (first_char == ")") {
 		cout << "Expressions can't start with a closing parenthesis at char 0." << endl;
@@ -29,13 +29,13 @@ void Infix_Parser::parse(string in)
 
 	//Now read the rest of the expression
 	int index = 1;	//we have already checked the 0th index
-	while (index <= in.size()) {
-		if (op_array->find((in[index]) != -1)) {
-			operators.push(in[index]);	//Push onto operator stack
+	while (index <= input_str.size()) {
+		if (op_array->find((input_str[index]) != -1)) {
+			operators.push(input_str[index]);	//Push onto operator stack
 		}
 		else {
-			if (isdigit(in[index])) {
-				operands.push(in[index]);	//Push onto operand stack
+			if (isdigit(input_str[index])) {
+				operands.push(input_str[index]);	//Push onto operand stack
 			}
 		}
 	}

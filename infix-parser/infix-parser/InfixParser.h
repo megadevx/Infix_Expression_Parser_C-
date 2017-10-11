@@ -29,7 +29,7 @@ public:
 
 
 	//read expression
-	void parse(string in);
+	void parse();
 
 private:
 	stack<char> operators;
