@@ -2,11 +2,13 @@
 #include <stack>
 #include <string>
 #include <iostream>
+#include <vector>
 using std::stack;
 using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::vector;
 
 class Infix_Parser
 {
@@ -35,6 +37,6 @@ private:
 	stack<char> operators;
 	stack<int> operands;
 	string input_str;
-	string unary[4] = { "!", "++", "--", "-" };
-	string op_array[20] = { "!", "++", "--", "-", "^", "*", "/", "%", "+", "-", ">", ">=", "<", "<=", "==", "!=", "&&", "||" };
+	vector<string> unary = { "!", "++", "--", "-" };
+	vector<string> op_array = { "!", "++", "--", "-", "^", "*", "/", "%", "+", "-", ">", ">=", "<", "<=", "==", "!=", "&&", "||" };
 };
