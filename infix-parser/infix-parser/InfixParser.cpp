@@ -15,7 +15,7 @@ void Infix_Parser::parse()
 	//Make sure that the expression isn't empty
 	if (input_str.size() == 0) {
 		cout << "Error reading the expression: expression is empty." << endl;
-	}
+	}	
 
 	//Check the first character. Print out error messages if error reading expression
 	string first_char = string(1, input_str[0]);
@@ -28,17 +28,7 @@ void Infix_Parser::parse()
 	}
 
 	//Now read the rest of the expression
-	int index = 1;	//we have already checked the 0th index
-	while (index <= input_str.size()) {
-		if (op_array->find((input_str[index]) != -1)) {
-			operators.push(input_str[index]);	//Push onto operator stack
-		}
-		else {
-			if (isdigit(input_str[index])) {
-				operands.push(input_str[index]);	//Push onto operand stack
-			}
-		}
-	}
+	
 }
 
 void Infix_Parser::set_input_str(string in)

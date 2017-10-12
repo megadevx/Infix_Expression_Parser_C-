@@ -2,11 +2,13 @@
 #include <stack>
 #include <string>
 #include <iostream>
+#include <regex>
 using std::stack;
 using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::regex;
 
 class Infix_Parser
 {
