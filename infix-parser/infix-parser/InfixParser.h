@@ -10,7 +10,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::regex;
-using std::stringstream;
+using std::istringstream;
 
 class Infix_Parser
 {
@@ -40,5 +40,4 @@ private:
 	stack<int> operands;
 	string input_str;
 	string unary[4] = { "!", "++", "--", "-" };
-	string op_array[20] = { "!", "++", "--", "-", "^", "*", "/", "%", "+", "-", ">", ">=", "<", "<=", "==", "!=", "&&", "||" };
 };

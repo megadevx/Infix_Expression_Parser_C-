@@ -26,6 +26,9 @@
     <ClInclude Include="InfixParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\Downloads\Stack Applications(1)(1)\Stack Applications\Postfix_Evaluator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InfixParser.cpp">
@@ -33,6 +36,9 @@
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\Downloads\Stack Applications(1)(1)\Stack Applications\Postfix_Evaluator.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
