@@ -2,6 +2,7 @@
 #include <stack>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include <regex>
 using std::stack;
 using std::string;
@@ -9,6 +10,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::regex;
+using std::stringstream;
 
 class Infix_Parser
 {
