@@ -5,6 +5,8 @@
 <<<<<<< HEAD
 #include <vector>
 =======
+#include <sstream>
+#include <regex>
 >>>>>>> master
 using std::stack;
 using std::string;
@@ -14,6 +16,8 @@ using std::endl;
 <<<<<<< HEAD
 using std::vector;
 =======
+using std::regex;
+using std::istringstream;
 >>>>>>> master
 
 class Infix_Parser
@@ -47,5 +51,6 @@ private:
 	vector<string> unary = { "!", "++", "--", "-" };
 	vector<string> op_array = { "!", "++", "--", "-", "^", "*", "/", "%", "+", "-", ">", ">=", "<", "<=", "==", "!=", "&&", "||" };
 =======
+	string unary[4] = { "!", "++", "--", "-" };
 >>>>>>> master
 };
