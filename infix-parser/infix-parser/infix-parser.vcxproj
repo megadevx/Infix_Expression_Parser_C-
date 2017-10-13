@@ -152,8 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InfixParser.h" />
+    <ClInclude Include="InfixEvaluator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="InfixEvaluator.cpp" />
     <ClCompile Include="InfixParser.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
