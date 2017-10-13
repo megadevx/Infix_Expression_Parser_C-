@@ -12,10 +12,10 @@ Infix_Parser::Infix_Parser(string in)
 
 void Infix_Parser::parse() 
 {
+	//Error Handling:
 	//Make sure that the expression isn't empty
 	if (input_str.size() == 0) {
 		cout << "Error reading the expression: expression is empty." << endl;
-	}
 
 	//Check the first character. Print out error messages if error reading expression
 	string first_char = string(1, input_str[0]);
