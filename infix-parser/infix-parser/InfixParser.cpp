@@ -16,6 +16,7 @@ void Infix_Parser::parse()
 	//Make sure that the expression isn't empty
 	if (input_str.size() == 0) {
 		cout << "Error reading the expression: expression is empty." << endl;
+	}	
 
 	//Check the first character. Print out error messages if error reading expression
 	string first_char = string(1, input_str[0]);
@@ -27,16 +28,16 @@ void Infix_Parser::parse()
 		cout << "Expressions can't start with a binary operator at char 0." << endl;
 	}
 
+
 	//Now read the rest of the expression
-	int index = 1;	//we have already checked the 0th index
-	while (index <= input_str.size()) {
-		if (op_array->find((input_str[index]) != -1)) {
-			operators.push(input_str[index]);	//Push onto operator stack
-		}
-		else {
-			if (isdigit(input_str[index])) {
-				operands.push(input_str[index]);	//Push onto operand stack
-			}
+	istringstream expression(input_str);	//read the expression with istringstream
+	char next_char;
+	while (expression >> next_char) {	//while there are characters to read
+		if (isdigit(next_char)) {
+			expression.putback(next_char);		//if the next character is an integer,
+			int value;							//put back, read as an integer (rather than a character)
+			expression >> value;
+			operands.push(value);				//push on the operands stack
 		}
 	}
 }
