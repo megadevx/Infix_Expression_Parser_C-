@@ -2,11 +2,27 @@
 
 Token::Token() {
 	//Default constructor
+	opr = "";
+	opd = 0;
+	type = 'N';
 }
 
-Token::Token(string opr, char t) {
+Token::Token(int op) {
 	//Non-default constructor
-	Token::set_type(opr, t);
+	Token::set_operand(op);
+}
+
+Token::Token(string opr) {
+	//Non-default constructor
+	if (Token::is_opd(opr)) {		//If it is an operand, set value as operand
+		int value;
+		istringstream buff(opr);
+		buff >> value;
+		Token::set_operand(value);
+	}
+	else if (Token::is_opr(opr)) {		//If it is an operator, set value as operator
+		Token::set_operator(opr);
+	}
 }
 
 string Token::get_operator() {
@@ -19,12 +35,12 @@ int Token::get_operand() {
 	return opd;
 }
 
-char Token::get_type(string in) {
+char Token::get_type() {
 	//Get the type of the operator that was passed in
-	if (unary->find(in) != -1) {	//Check if it is in array of unary operators
+	if (unary->find(opr) != -1) {	//Check if it is in array of unary operators
 		return 'U';
 	}
-	else if (binary->find(in) != -1) {		//Check if it is in array of binary operators
+	else if (binary->find(opr) != -1) {		//Check if it is in array of binary operators
 		return 'B';
 	}
 	else {
@@ -43,12 +59,12 @@ void Token::set_operand(int op) {
 	opd = op;
 }
 
-void Token::set_type(string op, char type) {
+void Token::set_type(char type) {
 	//Set the type of the given operator
-	if (unary->find(op) != -1) {		//if in the unary array, set type to U
+	if (unary->find(opr) != -1) {		//if in the unary array, set type to U
 		type = 'U';
 	}
-	else if(binary->find(op) != -1){
+	else if(binary->find(opr) != -1){
 		type = 'B';						//if in the binary array, set type to B
 	}
 	else {
@@ -66,9 +82,17 @@ bool Token::is_opr(string op) {
 	}
 }
 
-bool Token::is_opd(char op) {
-	//Check if char is a digit
-	if (isdigit(op)) {			
+bool Token::is_opd(string op) {
+	int digit = 0;
+
+	//Check if each char is a digit
+	for (int i = 0; i < op.size(); i++){
+		if (isdigit(i)) {
+			digit++;
+		}
+	}
+	
+	if (digit == op.size()) {
 		return true;
 	}
 	else {
@@ -94,4 +118,8 @@ bool Token::is_unary(string in) {
 	else {
 		return false;
 	}
+}
+
+vector<Token> Token::parse() {
+
 }

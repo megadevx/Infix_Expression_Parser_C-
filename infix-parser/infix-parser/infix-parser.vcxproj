@@ -151,13 +151,12 @@
     <None Include="..\..\..\..\..\source\repos\Infix_Expression_Parser_C-\project_1_guidelines.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\Downloads\Stack Applications(1)(1)\Stack Applications\Postfix_Evaluator.h" />
-    <ClInclude Include="InfixParser.h" />
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="Token.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InfixParser.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

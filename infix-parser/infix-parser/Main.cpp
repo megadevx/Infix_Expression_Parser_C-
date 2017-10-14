@@ -1,10 +1,10 @@
 #include <iostream>
-#include "InfixParser.h"
+#include "Token.h"
 using namespace std;
+
 int main()
 {
-	Infix_Parser ip("++++2-5(3^2)");
-	ip.parse();
+	Token token2("%");
 	system("pause");
 
 	return 1;
