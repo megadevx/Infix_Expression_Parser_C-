@@ -21,6 +21,13 @@ Token::Token(char op) {
 	Token::set_type();
 }
 
+Token::Token(char op, char t) {
+	//Non-default constructor
+	opd = 0;
+	opr = op;
+	type = t;
+}
+
 Token::Token(string opr) {
 	//Non-default constructor
 	opd = 0;

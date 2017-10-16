@@ -21,6 +21,7 @@ public:
 	//Non-default constructor
 	Token(int opd);
 	Token(char opr);
+	Token(char op, char t);
 	Token(string opr);
 
 	//Getters

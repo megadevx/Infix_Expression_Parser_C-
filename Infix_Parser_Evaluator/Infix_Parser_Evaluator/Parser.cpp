@@ -28,6 +28,7 @@ vector<Token> Parser::parse() {
 	istringstream buffer(exp);
 	int index = 0;
 	char next_char = ' ';
+	char prev = ' ';
 
 	while (buffer >> next_char) {
 		char next_next = buffer.peek();
@@ -47,8 +48,13 @@ vector<Token> Parser::parse() {
 		if (isspace(next_char)) {
 			continue;
 		}
+		//Check for unary -
+		else if (next_char == '-' && t_vector.empty()) {
+			Token t('-', 'U');
+			t_vector.push_back(t);
+		}
 		//Check for operands
-		if (isdigit(next_char)) {
+		else if (isdigit(next_char)) {
 			Token t(Parser::read_opd(buffer, next_char));
 			t_vector.push_back(t);
 		}
@@ -59,6 +65,10 @@ vector<Token> Parser::parse() {
 		}
 		else if (next_char == '-' && next_next == '-') {
 			Token t(Parser::read_opr(buffer, "-", index));	//Unary --
+			t_vector.push_back(t);
+		}
+		else if (!isdigit(prev) && next_char == '-') {		//Unary -
+			Token t('-', 'U');
 			t_vector.push_back(t);
 		}
 		else if (next_char == '>') {
@@ -89,7 +99,7 @@ vector<Token> Parser::parse() {
 			Token t(next_char);
 			t_vector.push_back(t);
 		}
-
+		char prev = next_char;
 		index++;
 	}
 	return t_vector;
@@ -118,7 +128,7 @@ string Parser::read_opr(istringstream &buf, string first, int index) {
 		op += '|';
 		return op;
 	}
-	buf.seekg(index + 1);
+	buf.putback(next);
 	return op;
 }
 
