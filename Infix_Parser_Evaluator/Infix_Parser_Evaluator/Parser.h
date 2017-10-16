@@ -22,6 +22,7 @@ public:
 	void set_expression(string in);
 
 	//Member Functions
-	string read_op(istringstream &buf, string first);
+	string read_opr(istringstream &buf, string first, int index);
+	int read_opd(istringstream &buf, char first);
 	vector<Token> parse();
 };

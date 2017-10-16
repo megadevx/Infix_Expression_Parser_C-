@@ -1,8 +1,14 @@
 #include "Evaluator.h"
 #include <iterator>
 #include <vector>
+#include <cmath>
+#include <algorithm>
+using std::find;
+using std::pow;
 using std::vector;
 using std::iterator;
+
+
 
 int Evaluator::get_precidence(string op_to_check)
 {
@@ -69,63 +75,71 @@ int Evaluator::get_precidence(string op_to_check)
 int Evaluator::evaluate()
 {
 	// check for some beginning errors
-	if (tokens[0].get_operator() == "") {
-		if (tokens[0].get_operator() == ")")
-			throw "Error";
-		else if (tokens[0].get_type() == 'B')
-			throw "Can't start with binary";
+	if (tokens[0].get_operator() == ")") {
+		throw "Can't start with a ) ";
+	}
+	else if (tokens[0].get_operator() != "" && tokens[0].get_type() == 'B') {
+		throw "Can't start with binary";
 	}
 	for (std::vector<Token>::iterator iter = tokens.begin(); iter != tokens.end(); iter++) {
-		// if next is a ( and the current is a number add a multiplication
-		std::vector<Token>::iterator next = iter;
 		
-		if (next != tokens.end()) {
-			if (next->get_operator() == "(" && iter->get_operator() == "") {
-				Token multi;
-				multi.set_operator("*");
-				operators.push(multi);
-			}
+		std::vector<Token>::iterator next = iter;
+		next++;
+		if (iter->get_operator() == "/" && next->get_operator() == "" && next->get_operand() == 0) {
+			throw "Division by zero error";
 		}
 		// if it is an operand then add the operand stack
 		if (iter->get_operator() == "" && !pushed_number_last) {
 			operands.push(*iter);
 			pushed_number_last = true; \
 				// check if unary operator was last then keep doing unary operation untill none left.
-				while (operators.top().get_type() == 'U') {
-
-					Token opr, rhs;
-					opr = operators.top();
-					operators.pop();
-					rhs = operands.top();
-					operands.pop();
-					operands.push(do_unary_math(opr, rhs));
+				while (!operators.empty()) {
+					if (operators.empty() || operands.empty()) {
+						throw "error operator and or operands stack is empty";
+					}
+					if (operators.top().get_type() == 'U') {
+						Token opr, rhs;
+						opr = operators.top();
+						operators.pop();
+						rhs = operands.top();
+						operands.pop();
+						operands.push(do_unary_math(opr, rhs));
+					}
+					else {
+						break;
+					}
 				}
-			// if next is a ( and the current is a number add a multiplication
-			if (next != tokens.end()) {
-				if (next->get_operator() == "(") {
-					Token multi;
-					multi.set_operator("*");
-					operators.push(multi);
-				}
-			}
 		}
 		// cannot have two operands in a row
 		else if (iter->get_operator() == "" && pushed_number_last) {
 			throw "Cannot have two operands in a row";
 		}
-		// if operator and number was pushed last and binary 
+
 		else if (iter->get_operator() == "(") {
+			if (pushed_number_last) {
+				Token multi;
+				multi.set_operator("*");
+				operators.push(multi);
+			}
 			operators.push(*iter);
+			pushed_number_last = false;	
 		}
 		else if (iter->get_operator() != "" && pushed_number_last && iter->get_type() == 'B') {
 
 			//The check the precidence of current token compared to the top of the operators
-			if (get_precidence(iter->get_operator()) > get_precidence(operators.top().get_operator())) {
+			if (operators.empty()) {
+				operators.push(*iter);
+				pushed_number_last = false;
+			}
+			else if (get_precidence(iter->get_operator()) > get_precidence(operators.top().get_operator())) {
 				operators.push(*iter);
 				pushed_number_last = false;
 			}
 			else {
 				// do binary math with the following because precidence of the top is greater
+				if (operators.empty() || operands.empty()) {
+					throw "error operator and or operand stack is empty";
+				}
 				Token lhs, rhs, opr;
 				rhs = operands.top();
 				operands.pop();
@@ -158,53 +172,53 @@ int Evaluator::evaluate()
 			}
 		}
 		else if (iter->get_operator() == ")") {
-			while (operators.top().get_operator() != "(") {
-				Token lhs, rhs, opr;
-				rhs = operands.top();
-				operands.pop();
-				lhs = operands.top();
-				operands.pop();
-				opr = operators.top();
-				operators.pop();
-				operands.push(do_binary_math(lhs, opr, rhs));
-
-			}
-			operators.pop();
-			pushed_number_last = true;
-			if (next != tokens.end()) {
-				if (next->get_operator() == "") {
-					Token multi;
-					multi.set_operator("*");
-					operators.push(multi);
+			while (!operators.empty()) {
+				if (operators.empty()) {
+					throw "error operator stack is empty and there is no (.";
+				}
+				if (operators.top().get_operator() != "(") {
+					Token lhs, rhs, opr;
+					rhs = operands.top();
+					operands.pop();
+					lhs = operands.top();
+					operands.pop();
+					opr = operators.top();
+					operators.pop();
+					operands.push(do_binary_math(lhs, opr, rhs));
+				}
+				else {
+					break;
 				}
 			}
-		}
-		else if (next == tokens.end()) {
-			while (!operators.empty()) {
-				Token lhs, rhs, opr;
-				rhs = operands.top();
-				operands.pop();
-				lhs = operands.top();
-				operands.pop();
-				opr = operators.top();
-				operators.pop();
-				operands.push(do_binary_math(lhs, opr, rhs));
-			}
-			int result = operands.top().get_operand();
-			operands.pop();
-			if (!operands.empty()) {
-				throw "The operand stack did not end up empty.";
-			}
-			return result;
+			operators.pop();
+			pushed_number_last = true; // add a check to see if the parathesis match
 		}
 	}
+
+		while (!operators.empty()) {
+			Token lhs, rhs, opr;
+			rhs = operands.top();
+			operands.pop();
+			lhs = operands.top();
+			operands.pop();
+			opr = operators.top();
+			operators.pop();
+			operands.push(do_binary_math(lhs, opr, rhs));
+		}
+		int result = operands.top().get_operand();
+		operands.pop();
+		if (!operands.empty()) {
+			throw "The operand stack did not end up empty.";
+		}
+		return result;
+
 }
 
 Token Evaluator::do_binary_math(Token lhs, Token opr, Token rhs)
 {
 	Token result;
 	if (opr.get_operator() == "^") {
-		result.set_operand(lhs.get_operand() ^ rhs.get_operand());
+		result.set_operand(pow(lhs.get_operand(), rhs.get_operand()));
 	}
 	else if (opr.get_operator() == "*") {
 		result.set_operand(lhs.get_operand() * rhs.get_operand());

@@ -27,51 +27,80 @@ vector<Token> Parser::parse() {
 	//Read the expression as istringstream
 	istringstream buffer(exp);
 	int index = 0;
-	char next_char;
-	buffer >> next_char;
-	
-	Token t(next_char);
+	char next_char = ' ';
 
-	//Error Handling
-	if (next_char == ')') {
-		cout << "Expression cannot begin with closing parenthesis @ char " << index << endl;
-	}
+	while (buffer >> next_char) {
+		char next_next = buffer.peek();
 
-	//Check for 2 character string operators
-	switch (next_char) {
-	case '+':{
-		Token t(Parser::read_op(buffer, "+"));	//Unary ++
+		//Error handle
+		if (t_vector.empty()) {
+			Token t(next_char);
+			if (next_char == ')') {
+				cout << "Expression cannot begin with closing parenthesis @ char " << index << endl;
+			}
+			else if (t.is_binary()) {
+				cout << "Expression cannot begin with binary operator @ char " << index << endl;
+			}
 		}
-	case '-': {
-		Token t(Parser::read_op(buffer, "-"));	//Unary --
+
+		//Check for spaces
+		if (isspace(next_char)) {
+			continue;
+		}
+		//Check for operands
+		if (isdigit(next_char)) {
+			Token t(Parser::read_opd(buffer, next_char));
+			t_vector.push_back(t);
+		}
+		//Check for 2 character string operators
+		else if (next_char == '+' && next_next == '+') {
+			Token t(Parser::read_opr(buffer, "+", index));	//Unary ++
+			t_vector.push_back(t);
+		}
+		else if (next_char == '-' && next_next == '-') {
+			Token t(Parser::read_opr(buffer, "-", index));	//Unary --
+			t_vector.push_back(t);
+		}
+		else if (next_char == '>') {
+			Token t(Parser::read_opr(buffer, ">", index));	//Binary >=
+			t_vector.push_back(t);
+		}
+		else if (next_char == '<') {
+			Token t(Parser::read_opr(buffer, "<", index));	//Binary <=
+			t_vector.push_back(t);
+		}
+		else if (next_char == '!') {
+			Token t(Parser::read_opr(buffer, "!", index));	//Binary !=
+			t_vector.push_back(t);
+		}
+		else if (next_char == '=' && next_next == '=') {
+			Token t(Parser::read_opr(buffer, "=", index));	//Binary ==
+			t_vector.push_back(t);
+		}
+		else if (next_char == '&' && next_char == '&') {
+			Token t(Parser::read_opr(buffer, "&", index));	//Binary &&
+			t_vector.push_back(t);
+		}
+		else if (next_char == '|' && next_char == '|') {
+			Token t(Parser::read_opr(buffer, "|", index));	//Binary ||
+			t_vector.push_back(t);
+		}
+		else {
+			Token t(next_char);
+			t_vector.push_back(t);
+		}
+
+		index++;
 	}
-	case '>': {
-		Token t(Parser::read_op(buffer, ">"));	//Binary >=
-	}
-	case '<': {
-		Token t(Parser::read_op(buffer, "<"));	//Binary <=
-	}
-	case '!': {
-		Token t(Parser::read_op(buffer, "!"));	//Binary !=
-	}
-	case '=': {
-		Token t(Parser::read_op(buffer, "="));	//Binary ==
-	}
-	case '&': {
-		Token t(Parser::read_op(buffer, "&"));	//Binary &&
-	}
-	case '|': {
-		Token t(Parser::read_op(buffer, "|"));	//Binary ||
-	}
-	}
-	t_vector.push_back(t);
 	return t_vector;
 }
 
-string Parser::read_op(istringstream &buf, string first) {
+string Parser::read_opr(istringstream &buf, string first, int index) {
+	//Read multi-character operators
 	string op = first;
 	char next = ' ';
 	buf >> next;
+
 	switch (next) {
 	case '+':
 		op += '+';
@@ -90,4 +119,12 @@ string Parser::read_op(istringstream &buf, string first) {
 		return op;
 	}
 	return op;
+}
+
+int Parser::read_opd(istringstream &buf, char first) {
+	//Read in multi-character operands
+	int value;
+	buf.putback(first);
+	buf >> value;
+	return value;
 }

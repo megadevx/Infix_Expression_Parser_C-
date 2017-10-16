@@ -32,10 +32,10 @@ public:
 	void set_operator(string op);
 	void set_operand(int op);
 	void set_type();
-	
+
 	//Member Functions
-	bool is_opd(string in);
-	bool is_opr(string in);
+	bool is_opd();
+	bool is_opr();
 	bool is_binary();
-	bool is_unary(string in);
+	bool is_unary();
 };

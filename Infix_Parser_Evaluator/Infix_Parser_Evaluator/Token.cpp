@@ -23,9 +23,10 @@ Token::Token(char op) {
 
 Token::Token(string opr) {
 	//Non-default constructor
+	opd = 0;
 	Token::set_operator(opr);
 	Token::set_type();
-	
+
 }
 
 string Token::get_operator() {
@@ -43,7 +44,7 @@ char Token::get_type() {
 	return type;
 }
 
-void Token::set_operator(string op){
+void Token::set_operator(string op) {
 	//Set the operator to the passed in string
 	opr = op;
 }
@@ -69,34 +70,19 @@ void Token::set_type() {
 	}
 }
 
-bool Token::is_opr(string op) {
-	//Check in unary vector
-	for (int i = 0; i < unary.size(); i++) {
-		if (unary[i] == op) {
-			return true;
-		}
+bool Token::is_opr() {
+	//Check if the token objet is an operator
+	if (opr != "") {
+		return true;
 	}
-
-	//Check in binary vector
-	for (int i = 0; i < binary.size(); i++) {
-		if (binary[i] == op) {
-			return true;
-		}
+	else {
+		return false;
 	}
-	return false;
 }
 
-bool Token::is_opd(string op) {
-	int digit = 0;
-
-	//Check if each char is a digit
-	for (int i = 0; i < op.size(); i++){
-		if (isdigit(i)) {
-			digit++;
-		}
-	}
-	
-	if (digit == op.size()) {
+bool Token::is_opd() {
+	//Check if the token objet is an operand
+	if (opd != 0) {
 		return true;
 	}
 	else {
@@ -114,10 +100,10 @@ bool Token::is_binary() {
 	return false;
 }
 
-bool Token::is_unary(string in) {
+bool Token::is_unary() {
 	//Check if the string is in the unary vector
 	for (int i = 0; i < unary.size(); i++) {
-		if (unary[i] == in) {
+		if (unary[i] == opr) {
 			return true;
 		}
 	}
