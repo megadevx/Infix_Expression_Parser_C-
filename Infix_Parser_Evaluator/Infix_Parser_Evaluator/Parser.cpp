@@ -118,6 +118,7 @@ string Parser::read_opr(istringstream &buf, string first, int index) {
 		op += '|';
 		return op;
 	}
+	buf.seekg(index + 1);
 	return op;
 }
 
