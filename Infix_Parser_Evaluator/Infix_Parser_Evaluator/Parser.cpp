@@ -33,17 +33,6 @@ vector<Token> Parser::parse() {
 	while (buffer >> next_char) {
 		char next_next = buffer.peek();
 
-		//Error handle
-		if (t_vector.empty()) {
-			Token t(next_char);
-			if (next_char == ')') {
-				cout << "Expression cannot begin with closing parenthesis @ char " << index << endl;
-			}
-			else if (t.is_binary()) {
-				cout << "Expression cannot begin with binary operator @ char " << index << endl;
-			}
-		}
-
 		//Check for spaces
 		if (isspace(next_char)) {
 			continue;
