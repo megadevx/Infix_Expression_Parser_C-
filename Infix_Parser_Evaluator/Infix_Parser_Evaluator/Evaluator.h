@@ -17,7 +17,7 @@ public:
 	vector<Token> get_tokens() { return tokens; };
 
 	//gets the precidence of the operators
-	int get_precidence(string op_to_check);
+	int get_precedence(string op_to_check);
 	//member function to evaluate the vector of tokens
 	int evaluate();
 	// do the different operations

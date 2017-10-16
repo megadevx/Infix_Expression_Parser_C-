@@ -10,7 +10,7 @@ using std::iterator;
 
 
 
-int Evaluator::get_precidence(string op_to_check)
+int Evaluator::get_precedence(string op_to_check)
 {
 	if (op_to_check == "!") {
 		return 8;
@@ -131,7 +131,7 @@ int Evaluator::evaluate()
 				operators.push(*iter);
 				pushed_number_last = false;
 			}
-			else if (get_precidence(iter->get_operator()) > get_precidence(operators.top().get_operator())) {
+			else if (get_precedence(iter->get_operator()) > get_precedence(operators.top().get_operator())) {
 				operators.push(*iter);
 				pushed_number_last = false;
 			}
