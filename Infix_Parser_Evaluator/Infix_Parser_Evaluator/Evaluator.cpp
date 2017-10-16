@@ -77,12 +77,14 @@ int Evaluator::evaluate()
 	}
 	for (std::vector<Token>::iterator iter = tokens.begin(); iter != tokens.end(); iter++) {
 		// if next is a ( and the current is a number add a multiplication
-		std::vector<Token>::iterator next = ++iter;
-
-		if (next->get_operator() == "(" && iter->get_operator() == "") {
-			Token multi;
-			multi.set_operator("*");
-			operators.push(multi);
+		std::vector<Token>::iterator next = iter;
+		
+		if (next != tokens.end()) {
+			if (next->get_operator() == "(" && iter->get_operator() == "") {
+				Token multi;
+				multi.set_operator("*");
+				operators.push(multi);
+			}
 		}
 		// if it is an operand then add the operand stack
 		if (iter->get_operator() == "" && !pushed_number_last) {
@@ -99,10 +101,12 @@ int Evaluator::evaluate()
 					operands.push(do_unary_math(opr, rhs));
 				}
 			// if next is a ( and the current is a number add a multiplication
-			if (next->get_operator() == "(") {
-				Token multi;
-				multi.set_operator("*");
-				operators.push(multi);
+			if (next != tokens.end()) {
+				if (next->get_operator() == "(") {
+					Token multi;
+					multi.set_operator("*");
+					operators.push(multi);
+				}
 			}
 		}
 		// cannot have two operands in a row
@@ -138,18 +142,19 @@ int Evaluator::evaluate()
 			throw "Cannot have two binary operators in a row.";
 		}
 		else if (iter->get_operator() != "" && iter->get_type() == 'U') {
-
-			if (next->get_operator() != "" && next->get_type() == 'B') {
-				throw "Cannot have a unary and then a binary operator.";
-			}
-			else if (next->get_operator() != "" && next->get_type() == 'U') {
-				operators.push(*iter);
-			}
-			else if (next->get_operator() == "") {
-				operators.push(*iter);
-			}
-			else {
-				throw "Neither unary operator or number followed a unary operator";
+			if (next != tokens.end()) {
+				if (next->get_operator() != "" && next->get_type() == 'B') {
+					throw "Cannot have a unary and then a binary operator.";
+				}
+				else if (next->get_operator() != "" && next->get_type() == 'U') {
+					operators.push(*iter);
+				}
+				else if (next->get_operator() == "") {
+					operators.push(*iter);
+				}
+				else {
+					throw "Neither unary operator or number followed a unary operator";
+				}
 			}
 		}
 		else if (iter->get_operator() == ")") {
@@ -166,11 +171,12 @@ int Evaluator::evaluate()
 			}
 			operators.pop();
 			pushed_number_last = true;
-
-			if (next->get_operator() == "") {
-				Token multi;
-				multi.set_operator("*");
-				operators.push(multi);
+			if (next != tokens.end()) {
+				if (next->get_operator() == "") {
+					Token multi;
+					multi.set_operator("*");
+					operators.push(multi);
+				}
 			}
 		}
 		else if (next == tokens.end()) {
@@ -213,7 +219,7 @@ Token Evaluator::do_binary_math(Token lhs, Token opr, Token rhs)
 		result.set_operand(lhs.get_operand() + rhs.get_operand());
 	}
 	else if (opr.get_operator() == "-") {
-		result.set_operand(hs.get_operand() - rhs.get_operand());
+		result.set_operand(lhs.get_operand() - rhs.get_operand());
 	}
 	else if (opr.get_operator() == ">") {
 		result.set_operand(lhs.get_operand() > rhs.get_operand());
