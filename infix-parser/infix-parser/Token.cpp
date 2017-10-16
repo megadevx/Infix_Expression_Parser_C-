@@ -119,7 +119,3 @@ bool Token::is_unary(string in) {
 		return false;
 	}
 }
-
-vector<Token> Token::parse() {
-
-}

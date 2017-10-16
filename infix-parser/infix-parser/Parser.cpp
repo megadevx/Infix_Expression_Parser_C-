@@ -12,4 +12,6 @@ Parser::Parser(string in) {
 
 vector<Token> Parser::parse() {
 	//Break the expression into a vector of tokens
+	vector<Token> result;
+	return result;
 }
