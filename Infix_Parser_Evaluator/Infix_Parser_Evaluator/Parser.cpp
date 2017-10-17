@@ -88,7 +88,7 @@ vector<Token> Parser::parse() {
 			Token t(next_char);
 			t_vector.push_back(t);
 		}
-		char prev = next_char;
+		prev = next_char;
 		index++;
 	}
 	return t_vector;

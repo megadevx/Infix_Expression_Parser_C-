@@ -4,12 +4,12 @@
 #include "Evaluator.h"
 using namespace std;
 
-void main()
+int main()
 {
-	// the parser is not returning the full statement.
-	Parser parse("++++2-5(3^2)");
+	Parser parse("1/0");
 	vector<Token> v = parse.parse();
 	Evaluator e(v);
 	cout << e.evaluate() << endl;
 	system("pause");
+	return 0;
 }
